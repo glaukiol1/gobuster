@@ -2,6 +2,8 @@ package helpers
 
 import "bufio"
 
+var ar_len int = 0
+
 func chunkSlice(slice []string, chunkSize int) [][]string {
 	var chunks [][]string
 	for i := 0; i < len(slice); i += chunkSize {
@@ -19,9 +21,8 @@ func chunkSlice(slice []string, chunkSize int) [][]string {
 	return chunks
 }
 
-func SplitWordlist(wordlist bufio.Scanner, threads int) [][]string {
-	var len int = 23
-	return chunkSlice(getWordlistArray(wordlist), len/threads)
+func SplitWordlist(wordlist bufio.Scanner, threads int, max int) [][]string {
+	return chunkSlice(getWordlistArray(wordlist)[:max], max/threads)
 }
 
 func getWordlistArray(wordlist bufio.Scanner) []string {

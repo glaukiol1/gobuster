@@ -1,28 +1,32 @@
 package src
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
 )
 
-func Request(amount int, url string, id int) [4]int {
+func Request(url string, id int, wordlist []string) [4]int {
 	var startTime = time.Now().Unix()
 	log.Println("Starting...")
 	var errors int = 0
 	var successes int = 0
 	var hardErrors int = 0
-	for i := 0; i < amount; i++ {
-		resp, err := http.Get(url)
+
+	println(len(wordlist))
+
+	for i := 0; i < len(wordlist); i++ {
+		resp, err := http.Get(url + wordlist[i])
 		if resp.StatusCode != 200 {
 			errors = errors + 1
 		}
-
 		if err != nil {
 			hardErrors = hardErrors + 1
-		} else {
+		}
+		if err == nil && resp.StatusCode == 200 {
 			successes = successes + 1
-			println("/ ", resp.StatusCode)
+			println("/"+wordlist[i], resp.StatusCode, "ID: "+fmt.Sprint(id))
 		}
 	}
 	var a [4]int

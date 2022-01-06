@@ -8,11 +8,12 @@ func StartThreads(threads int, url string, splitWordlist [][]string) {
 	c := make(chan [4]int)
 
 	for i := 0; i < threads; i++ {
+		var g = splitWordlist[i]
+		var id = i
 		go func() {
-			c <- src.Request(10, "https://jsonplaceholder.typicode.com/posts", 0)
+			c <- src.Request(url, id, g)
 		}()
 	}
-
 	var successes int = 0
 	var errors int = 0
 	var hardErrors = 0

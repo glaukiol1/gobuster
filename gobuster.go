@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	var wordlist = helpers.GetWordlist("/users/glaukiollupo/Projects/pybuster/wordlist.txt")
-	helpers.StartThreads(10, "http://httpbin.org/get", helpers.SplitWordlist(wordlist, 2))
+	var wordlist = helpers.GetWordlist("/users/glaukiollupo/Projects/pybuster/wordlist-dir.txt")
+	helpers.StartThreads(20, "http://sans.org/", helpers.SplitWordlist(wordlist, 21, 90000))
 }

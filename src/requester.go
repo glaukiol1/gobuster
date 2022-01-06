@@ -20,8 +20,10 @@ func Request(amount int, url string, id int) [4]int {
 
 		if err != nil {
 			hardErrors = hardErrors + 1
+		} else {
+			successes = successes + 1
+			println("/ ", resp.StatusCode)
 		}
-		successes = successes + 1
 	}
 	var a [4]int
 	a[0] = successes

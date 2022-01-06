@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	helpers.StartThreads(10, "http://httpbin.org/get")
-	helpers.GetWordlist("go.mod").Text()
+	var wordlist = helpers.GetWordlist("/users/glaukiollupo/Projects/pybuster/wordlist.txt")
+	helpers.StartThreads(10, "http://httpbin.org/get", helpers.SplitWordlist(wordlist, 2))
 }

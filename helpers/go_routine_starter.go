@@ -4,7 +4,7 @@ import (
 	"example.com/hello/src"
 )
 
-func StartThreads(threads int, url string) {
+func StartThreads(threads int, url string, splitWordlist [][]string) {
 	c := make(chan [4]int)
 
 	for i := 0; i < threads; i++ {

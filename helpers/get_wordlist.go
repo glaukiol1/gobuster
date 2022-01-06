@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func GetWordlist(path string) *bufio.Scanner {
+func GetWordlist(path string) bufio.Scanner {
 
 	f, err := os.Open(path)
 
@@ -14,9 +14,8 @@ func GetWordlist(path string) *bufio.Scanner {
 		log.Fatal(err)
 	}
 
-	defer f.Close()
-
-	return bufio.NewScanner(f)
+	scanner := bufio.NewScanner(f)
+	return *scanner
 
 	// if err := scanner.Err(); err != nil {
 	// 	log.Fatal(err)

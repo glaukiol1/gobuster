@@ -11,16 +11,13 @@ func LineCounter(path string) [2]int {
 	fileScanner := bufio.NewScanner(file)
 	lineCount := 0
 	longestLine := 0
-	var longest_line string
 	for fileScanner.Scan() {
 		lineCount++
 		len_ := len(fileScanner.Text())
 		if len_ > longestLine {
 			longestLine = len_
-			longest_line = fileScanner.Text()
 		}
 	}
-	print(longest_line)
 	return [2]int{lineCount, longestLine}
 }
 

@@ -4,14 +4,15 @@ import (
 	"example.com/hello/src"
 )
 
-func StartThreads(threads int, url string, splitWordlist [][]string) {
+func StartThreads(threads int, url string, splitWordlist [][]string, lines int) {
 	c := make(chan [4]int)
-
+	var _total int = 0
+	var __total *int = &_total
 	for i := 0; i < threads; i++ {
 		var g = splitWordlist[i]
 		var id = i
 		go func() {
-			c <- src.Request(url, id, g)
+			c <- src.Request(__total, lines, url, id, g)
 		}()
 	}
 	var successes int = 0

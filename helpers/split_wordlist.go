@@ -1,8 +1,20 @@
 package helpers
 
-import "bufio"
+import (
+	"bufio"
+	"os"
+)
 
-var ar_len int = 0
+func LineCounter(path string) int {
+	file, _ := os.Open(path)
+	defer file.Close()
+	fileScanner := bufio.NewScanner(file)
+	lineCount := 0
+	for fileScanner.Scan() {
+		lineCount++
+	}
+	return lineCount
+}
 
 func chunkSlice(slice []string, chunkSize int) [][]string {
 	var chunks [][]string

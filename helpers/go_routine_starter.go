@@ -1,13 +1,14 @@
 package helpers
 
 import (
+	"fmt"
 	"time"
 
 	"example.com/hello/src"
 )
 
-func StartThreads(threads int, url string, splitWordlist [][]string, lines int) {
-	src.PrintIntro()
+func StartThreads(mode string, threads int, url string, splitWordlist [][]string, lines int, wordlist_path, success_statuses string) {
+	src.PrintIntro(mode, url, wordlist_path, success_statuses, fmt.Sprint(threads))
 	time.Sleep(5 * time.Second)
 	c := make(chan [4]int)
 	var _total int = 0
@@ -24,8 +25,6 @@ func StartThreads(threads int, url string, splitWordlist [][]string, lines int) 
 	var hardErrors = 0
 	var avarageDoneTime = 0
 	for i := 0; i < threads; i++ {
-		// Await both of these values
-		// simultaneously, printing each one as it arrives.
 		select {
 		case arry := <-c:
 			for i := 0; i < 4; i++ {

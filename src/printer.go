@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-var width int = 60
+var width int = 66
 
 var rstring = strings.Repeat("=", width)
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"example.com/hello/src"
+	"github.com/glaukiol1/gobuster/src"
 )
 
 func StartThreads(mode string, threads int, url string, splitWordlist [][]string, lines int, wordlist_path, success_statuses string, longest_line int) {

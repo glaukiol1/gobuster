@@ -1,7 +1,7 @@
 package main
 
 import (
-	"example.com/hello/helpers"
+	"github.com/glaukiol1/gobuster/helpers"
 )
 
 func main() {

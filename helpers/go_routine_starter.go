@@ -17,7 +17,7 @@ func StartThreads(mode string, threads int, url string, splitWordlist [][]string
 		var g = splitWordlist[i]
 		var id = i
 		go func() {
-			c <- src.Request(__total, threads, lines, url, id, g)
+			c <- src.Request(__total, threads, lines, url, id, g, success_statuses)
 		}()
 	}
 	var successes int = 0

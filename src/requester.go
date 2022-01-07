@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func Request(total *int, threads int, wordlist_total int, url string, id int, wordlist []string, success_string string) [4]int {
+func Request(total *int, threads int, wordlist_total int, url string, id int, wordlist []string, success_string string, longest_line int) [4]int {
 	var startTime = time.Now().Unix()
 	var errors int = 0
 	var successes int = 0
@@ -24,7 +24,7 @@ func Request(total *int, threads int, wordlist_total int, url string, id int, wo
 		}
 		if err == nil && strings.Contains(success_string, fmt.Sprint(resp.StatusCode)) {
 			successes = successes + 1
-			var spaces int = 20
+			var spaces int = longest_line
 
 			println("/" + wordlist[i] + strings.Repeat(" ", spaces-len("/"+wordlist[i])) + "  Status: " + fmt.Sprint(resp.StatusCode) + " (Thread: " + fmt.Sprint(id) + ")  " + fmt.Sprint(*total) + "/" + fmt.Sprint(len(wordlist)*threads))
 		}

@@ -7,7 +7,7 @@ import (
 	"example.com/hello/src"
 )
 
-func StartThreads(mode string, threads int, url string, splitWordlist [][]string, lines int, wordlist_path, success_statuses string) {
+func StartThreads(mode string, threads int, url string, splitWordlist [][]string, lines int, wordlist_path, success_statuses string, longest_line int) {
 	src.PrintIntro(mode, url, wordlist_path, success_statuses, fmt.Sprint(threads))
 	time.Sleep(5 * time.Second)
 	c := make(chan [4]int)
@@ -17,7 +17,7 @@ func StartThreads(mode string, threads int, url string, splitWordlist [][]string
 		var g = splitWordlist[i]
 		var id = i
 		go func() {
-			c <- src.Request(__total, threads, lines, url, id, g, success_statuses)
+			c <- src.Request(__total, threads, lines, url, id, g, success_statuses, longest_line)
 		}()
 	}
 	var successes int = 0

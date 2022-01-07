@@ -1,10 +1,14 @@
 package helpers
 
 import (
+	"time"
+
 	"example.com/hello/src"
 )
 
 func StartThreads(threads int, url string, splitWordlist [][]string, lines int) {
+	src.PrintIntro()
+	time.Sleep(5 * time.Second)
 	c := make(chan [4]int)
 	var _total int = 0
 	var __total *int = &_total

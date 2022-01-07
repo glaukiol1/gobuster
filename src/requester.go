@@ -2,7 +2,6 @@ package src
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -10,12 +9,9 @@ import (
 
 func Request(total *int, threads int, wordlist_total int, url string, id int, wordlist []string) [4]int {
 	var startTime = time.Now().Unix()
-	log.Println("Starting...")
 	var errors int = 0
 	var successes int = 0
 	var hardErrors int = 0
-
-	println(len(wordlist))
 
 	for i := 0; i < len(wordlist); i++ {
 		resp, err := http.Get(url + wordlist[i])
@@ -28,7 +24,7 @@ func Request(total *int, threads int, wordlist_total int, url string, id int, wo
 		}
 		if err == nil && resp.StatusCode == 200 {
 			successes = successes + 1
-			var spaces int = 50
+			var spaces int = 20
 
 			println("/" + wordlist[i] + strings.Repeat(" ", spaces-len("/"+wordlist[i])) + "  Status: " + fmt.Sprint(resp.StatusCode) + " (Thread: " + fmt.Sprint(id) + ")  " + fmt.Sprint(*total) + "/" + fmt.Sprint(len(wordlist)*threads))
 		}

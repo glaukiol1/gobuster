@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func Request(total *int, wordlist_total int, url string, id int, wordlist []string) [4]int {
+func Request(total *int, threads int, wordlist_total int, url string, id int, wordlist []string) [4]int {
 	var startTime = time.Now().Unix()
 	log.Println("Starting...")
 	var errors int = 0
@@ -19,8 +19,8 @@ func Request(total *int, wordlist_total int, url string, id int, wordlist []stri
 
 	for i := 0; i < len(wordlist); i++ {
 		resp, err := http.Get(url + wordlist[i])
-		*total++
-		if resp.StatusCode != 200 {
+		*total = *total + 1
+		if resp.StatusCode != 200 && err == nil {
 			errors = errors + 1
 		}
 		if err != nil {
@@ -30,7 +30,7 @@ func Request(total *int, wordlist_total int, url string, id int, wordlist []stri
 			successes = successes + 1
 			var spaces int = 50
 
-			println("/" + wordlist[i] + strings.Repeat(" ", spaces-len("/"+wordlist[i])) + "  Status: " + fmt.Sprint(resp.StatusCode) + " (Thread: " + fmt.Sprint(id) + ")  " + fmt.Sprint(*total) + "/" + fmt.Sprint(wordlist_total))
+			println("/" + wordlist[i] + strings.Repeat(" ", spaces-len("/"+wordlist[i])) + "  Status: " + fmt.Sprint(resp.StatusCode) + " (Thread: " + fmt.Sprint(id) + ")  " + fmt.Sprint(*total) + "/" + fmt.Sprint(len(wordlist)*threads))
 		}
 	}
 	var a [4]int

@@ -12,7 +12,7 @@ func StartThreads(threads int, url string, splitWordlist [][]string, lines int) 
 		var g = splitWordlist[i]
 		var id = i
 		go func() {
-			c <- src.Request(__total, lines, url, id, g)
+			c <- src.Request(__total, threads, lines, url, id, g)
 		}()
 	}
 	var successes int = 0
@@ -39,5 +39,5 @@ func StartThreads(threads int, url string, splitWordlist [][]string, lines int) 
 		}
 	}
 	avarageDoneTime = avarageDoneTime / threads
-	println(successes, errors, hardErrors, avarageDoneTime)
+	src.PrintSummary(successes, errors, hardErrors, avarageDoneTime)
 }

@@ -13,6 +13,6 @@ func main() {
 
 	helpers.CommandLineArgs(&wordlist_path, &success_statuses, &url, &mode, &threads)
 	var wordlist = helpers.GetWordlist(wordlist_path)
-	var lines = 1000 //helpers.LineCounter((wordlist_path))[0]
+	var lines = helpers.LineCounter((wordlist_path))[0]
 	helpers.StartThreads(mode, threads, url, helpers.SplitWordlist(wordlist, threads, lines), lines, wordlist_path, success_statuses, helpers.LineCounter(wordlist_path)[1])
 }
